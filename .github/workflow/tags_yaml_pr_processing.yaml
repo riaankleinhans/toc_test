@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.ref }} # Fix detached HEAD issue
+          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
 
       - name: Set up Go
@@ -54,15 +54,17 @@ jobs:
       - name: Create new PR, comment and close original (forked PR)
         if: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
         env:
+          # Use your PAT for PR creation and modification
           GITHUB_TOKEN: ${{ secrets.TAGS_YAML_UPDATE_GHA }}
         run: |
           set -e
+          # Define branch name for the update in the base repo
           BRANCH_NAME=readme-update-fork-${{ github.event.pull_request.number }}
           
-          # Reset remote origin to base repository
+          # Reset remote origin to point to the base repository
           git remote set-url origin https://github.com/${{ github.repository }}.git
           
-          # Create a new branch in base repo
+          # Create (or force update) a new branch for the update
           git checkout -B $BRANCH_NAME
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
@@ -70,7 +72,7 @@ jobs:
           git commit -m "Update README based on tags.yaml changes" || { echo 'No changes to commit'; exit 0; }
           git push origin $BRANCH_NAME --force
           
-          # Create a new PR in the base repository
+          # Create a new PR via the GitHub API in the base repository
           PR_TITLE="Update README based on tags.yaml changes from fork PR #${{ github.event.pull_request.number }}"
           PR_BODY="This PR updates the README file based on changes in tags.yaml from fork PR #${{ github.event.pull_request.number }}."
           API_URL=https://api.github.com/repos/${{ github.repository }}/pulls
@@ -84,7 +86,7 @@ jobs:
             exit 1
           fi
           
-          # Comment on the original fork PR and close it
+          # Comment on the original fork PR indicating it is being superseded and then close it
           ORIGINAL_COMMENT="This PR has been superseded by [PR #$NEW_PR_NUMBER](https://github.com/${{ github.repository }}/pull/$NEW_PR_NUMBER). Closing this PR."
           ORIGINAL_COMMENT_API_URL=https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments
           ORIGINAL_COMMENT_DATA=$(jq -n --arg body "$ORIGINAL_COMMENT" '{body: $body}')
@@ -93,7 +95,7 @@ jobs:
           CLOSE_API_URL=https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}
           curl -s -X PATCH -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: application/json" -d '{ "state": "closed" }' $CLOSE_API_URL
           
-          # Comment on the new PR linking back to the original fork PR
+          # Comment on the new PR indicating that it replaces the original fork PR
           NEW_PR_COMMENT="This PR replaces fork PR [#${{ github.event.pull_request.number }}](https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }})."
           NEW_PR_COMMENT_API_URL=https://api.github.com/repos/${{ github.repository }}/issues/$NEW_PR_NUMBER/comments
           NEW_PR_COMMENT_DATA=$(jq -n --arg body "$NEW_PR_COMMENT" '{body: $body}')
