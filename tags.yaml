@@ -14,7 +14,7 @@ tags:
       tech_leads:
         - github: riaankleinhans
           name: Riaan Kleinhans
-          company: The Linux Foundation
+          company: Foo
           email: rkleinhans@contractor.linuxfoundation.org
     meetings:
       - description: TAG Operational Resilience Meeting
