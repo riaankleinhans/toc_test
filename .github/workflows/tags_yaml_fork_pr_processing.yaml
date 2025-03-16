@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout PR branch
+      - name: Checkout PR branch from fork
         uses: actions/checkout@v4
         with:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
@@ -45,12 +45,12 @@ jobs:
 
       - name: Create new PR, comment and close original (forked PR)
         env:
-          # Use a different token here for fork PRs if needed.
-          GITHUB_TOKEN: ${{ secrets.TAGS_YAML_UPDATE_GHA }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e
           cp tags.yaml /tmp/tags.yaml
           BRANCH_NAME=readme-update-fork-${{ github.event.pull_request.number }}
+          # Point to the base repository
           git remote set-url origin https://github.com/${{ github.repository }}.git
           git fetch origin main
           git checkout -B $BRANCH_NAME origin/main
@@ -58,8 +58,6 @@ jobs:
           cd generator
           go run readme_app.go
           cd ..
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
           git add .
           if ! git diff --staged --quiet; then
             git commit -m "Update README based on tags.yaml changes"
