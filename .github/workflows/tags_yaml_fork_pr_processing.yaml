@@ -1,4 +1,4 @@
-name: Generate README on Tags Change
+name: Generate README on Tags Change (Forked PR)
 
 on:
   pull_request_target:
@@ -19,7 +19,9 @@ permissions:
   pull-requests: write
 
 jobs:
-  update-readme:
+  update-readme-fork:
+    # This job runs only if the PR is coming from a fork.
+    if: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
     runs-on: ubuntu-latest
 
     steps:
@@ -41,30 +43,9 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
-      - name: Run readme_app.go
-        working-directory: generator
-        run: |
-          go run readme_app.go
-
-      - name: Commit and push changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # Ensure we are on the PR branch
-          git checkout ${{ github.event.pull_request.head.ref }}
-
-          git add .
-          if ! git diff --staged --quiet; then
-            git commit -m "Update README based on tags.yaml changes"
-            git push origin ${{ github.event.pull_request.head.ref }}
-          else
-            echo "No changes to commit"
-          fi
-
-      # ===== Forked PR Branch Steps =====
       - name: Create new PR, comment and close original (forked PR)
-        if: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
         env:
+          # Use a different token here for fork PRs if needed.
           GITHUB_TOKEN: ${{ secrets.TAGS_YAML_UPDATE_GHA }}
         run: |
           set -e
