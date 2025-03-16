@@ -8,7 +8,7 @@ Observability, Management, Business Continuity, Resource Optimization, Cost Effi
 
 ## Leadership
 ### Chairs
-- Riaan Kleinhans (**[@riaankleinhans](https://github.com/riaankleinhans)**), CNCF
+- Riaan Kleinhans (**[@riaankleinhans](https://github.com/riaankleinhans)**), The Linux Foundation
 
 ## Meetings
 - **TAG Operational Resilience Meeting**: [Calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/cncf?view=week) | [Recordings](https://www.youtube.com/playlist?foo)
