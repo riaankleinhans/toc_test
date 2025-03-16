@@ -29,7 +29,7 @@ type Leadership struct {
 type Meeting struct {
 	Description   string `yaml:"description"`
 	RecordingsURL string `yaml:"recordings_url"`
-	TagCalendar   string `yaml:"tag_calendar,omitempty"` // Change to TagCalendar
+	TagCalendar   string `yaml:"tag_calendar,omitempty"` // Change to tagCalendar
 }
 
 type Contact struct {
@@ -38,7 +38,7 @@ type Contact struct {
 	TOCLiaison  Person `yaml:"toc_liaison"`
 }
 
-type TAG struct {
+type Tag struct {
 	Dir              string       `yaml:"dir"`
 	Name             string       `yaml:"name"`
 	MissionStatement string       `yaml:"mission_statement"`
@@ -60,14 +60,14 @@ type TOCSubproject struct {
 }
 
 type Config struct {
-	TAGs           []TAG           `yaml:"tags"`
+	Tags           []Tag           `yaml:"tags"`
 	TOCSubprojects []TOCSubproject `yaml:"toc_subprojects"`
 }
 
 func main() {
 	// Define paths
 	configPath := filepath.Join("..", "tags.yaml")
-	tagsDir := filepath.Join("..", "TAGs")
+	tagsDir := filepath.Join("..", "tags")
 	tocDir := filepath.Join("..", "toc_subprojects")
 	tagTemplatePath := filepath.Join("..", "generator", "tag_readme.tmpl")
 	tocTemplatePath := filepath.Join("..", "generator", "toc_subproject_readme.tmpl")
@@ -104,7 +104,7 @@ func main() {
 
 	// Ensure directories exist
 	if err := ensureDir(tagsDir); err != nil {
-		log.Fatalf("Failed to create TAGs directory: %v", err)
+		log.Fatalf("Failed to create tags directory: %v", err)
 	}
 	if err := ensureDir(tocDir); err != nil {
 		log.Fatalf("Failed to create TOC Subprojects directory: %v", err)
@@ -134,7 +134,7 @@ func main() {
 			}
 		}
 	}
-	for _, tag := range config.TAGs {
+	for _, tag := range config.Tags {
 		tagFolderPath := filepath.Join(tagsDir, tag.Dir)
 		if err := ensureDir(tagFolderPath); err != nil {
 			log.Fatalf("Failed to create folder for tag %s: %v", tag.Name, err)
