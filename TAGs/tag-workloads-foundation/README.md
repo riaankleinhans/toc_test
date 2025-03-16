@@ -8,7 +8,7 @@ Containers, OS, Runtime, Virtual Machines, Serverless, Web Assembly, Batch, Sche
 
 ## Leadership
 ### Chairs
-- Riaan Kleinhans (**[@riaankleinhans](https://github.com/riaankleinhans)**), Linux Foundation
+- Riaan Kleinhans (**[@riaankleinhans](https://github.com/riaankleinhans)**), The Linux Foundation
 
 ## Meetings
 - **TAG Workloads Foundation Meeting**: [Calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/cncf?view=week) | [Recordings](https://www.youtube.com/playlist?foo)
