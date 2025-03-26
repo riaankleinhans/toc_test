@@ -9,7 +9,7 @@ tags: # Technical Advisory Groups
       chairs:
         - github: foo
           lfx_id: baz
-          name: Foo Baz Bar
+          name: Berno Baz Bar
           company: Foo Baz Bar co
           email: me@foobazbar.org
         - github: foo

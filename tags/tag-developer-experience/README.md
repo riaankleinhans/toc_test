@@ -8,7 +8,7 @@ Databases, Microservices, Streaming, Messaging, API Management, Dev Frameworks.
 
 ## Leadership
 ### Chairs
-- Foo Baz Bar (**[@foo](https://github.com/foo)**), Foo Baz Bar co
+- Berno Baz Bar (**[@foo](https://github.com/foo)**), Foo Baz Bar co
 - Foo Baz Bar (**[@foo](https://github.com/foo)**), Foo Baz Bar co.
 ### Tech Leads
 - Foo Baz Bar (**[@foo](https://github.com/foo)**), Foo Baz Bar co.
