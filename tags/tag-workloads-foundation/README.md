@@ -18,7 +18,7 @@ Containers, OS, Runtime, Virtual Machines, Serverless, Web Assembly, Batch, Sche
 - **TAG Workloads Foundation Meetings**: [Calendar](https://zoom-lfx.platform.linuxfoundation.org/meetings/tag-workloads-foundation?view=list) | [Recordings](https://www.youtube.com/playlist?foo)
 
 ## Contact
-- Slack: [#https://cloud-native.slack.com/archives/C08K71W9HAS](https://slack.cncf.io/messages/https://cloud-native.slack.com/archives/C08K71W9HAS})
+- Slack: [Tag TAG Workloads Foundation Slack](https://cloud-native.slack.com/archives/https://cloud-native.slack.com/archives/C08K71W9HAS)
 - [Mailing List](https://lists.cncf.io/g/cncf-tag-workloads-foundation)
 - TOC Liaison: Foo Bar (**[@foobar](https://github.com/foobar)**)
 
@@ -26,5 +26,5 @@ Containers, OS, Runtime, Virtual Machines, Serverless, Web Assembly, Batch, Sche
 - **Workloads Foundation-sub-foo**: [Mailing List](https://lists.cncf.io/g/cncf-tag-workloads-foundation)
 ### Subproject Leads
 - Foo Baz Bar (**[@foo](https://github.com/foo)**), Foo Baz Bar co.
-## Initiatives
+## TAG Workloads Foundation Initiatives
 https://github.com/cncf/toc/issues?q=is%3Aissue%20label%3A%22TAG%20Workloads%20Foundation%20Initiative%22
