@@ -43,3 +43,8 @@
 - {{.Name}} (**[@{{.GitHub}}](https://github.com/{{.GitHub}})**){{if .Company}}, {{.Company}}{{end}}
 {{- end }}
 {{- end }}
+
+{{- if .TagInitiatives }}
+## Initiatives
+{{.TagInitiatives}}
+{{- end }}
